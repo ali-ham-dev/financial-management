@@ -1,30 +1,70 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+  import { ref, onMounted } from 'vue';  
+  
+  const name = ref("John Doe");
+  const status = ref("active");
+  const tasks = ref(["Task 1", "Task 2", "Task 3"]);
+  const newTask = ref("");
+
+  const toggleStatus = () => {
+    if (status.value === "active") {
+      status.value = "pending";
+    } else if (status.value === "pending") {
+      status.value = "inactive";
+    } else {
+      status.value = "active";
+    }
+  }
+
+  const addTask = () => {
+    if (newTask.value.trim() !== "") {
+      tasks.value.push(newTask.value);
+      newTask.value = "";
+    }
+  }
+
+  const deleteTask = (index: number): void => {
+    tasks.value.splice(index, 1);
+  }
+
+  onMounted(async () => {
+    try {
+      const response = await fetch("https://jsonplaceholder.typicode.com/todos");
+      const data = await response.json();
+      tasks.value = data.map((task: any) => task.title)
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+    }
+  })
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <h1>FinManag</h1>
+  <p v-if="status === 'active'">User is active</p>
+  <p v-else-if="status === 'pending'">User is pending</p>
+  <p v-else>User is not active</p>
+
+  <form @submit.prevent="addTask">
+    <label for="newTask">New Task</label>
+    <input type="text" id="newTask" name="newTask" v-model="newTask" />
+    <button type="submit">Submit</button>
+  </form>
+
+  <h3>Tasks</h3>
+  <ul>
+    <li v-for="(task, index) in tasks" :key="task">
+      <span>
+        {{ task }}
+        <button @click="deleteTask(index)">X</button>
+      </span>
+    </li>
+  </ul>
+
+  <!-- <button v-on:click="toggleStatus">Toggle Status</button> -->
+  <button @click="toggleStatus">Toggle Status</button>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+
 </style>
