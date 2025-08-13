@@ -1,3 +1,9 @@
+<script setup lang='ts'>
+  import NavBar from './components/NavBar.vue'
+  // import { RouterView } from 'vue-router'
+</script>
+
 <template>
-  <h1 class="text-3xl">FinManag</h1>
+  <NavBar />
+  <!-- <RouterView /> -->
 </template>
