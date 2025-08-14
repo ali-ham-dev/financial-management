@@ -6,8 +6,8 @@
 </script>
 
 <template>
-  <NavBar />
-  <Hero title="This is a Test Title." subtitle="This is a test sub title."/>
-  <HomeCards />
-  <JobListings />
+    <NavBar />
+    <Hero title="This is a Test Title." subtitle="This is a test sub title."/>
+    <HomeCards />
+    <JobListings :limit="3" :showButton="true"/>
 </template>
