@@ -4,6 +4,6 @@
 </script>
 
 <template>
-    <NavBar />
-    <RouterView />
+  <RouterView />
+  <NavBar />
 </template>

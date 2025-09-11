@@ -1,11 +1,12 @@
-<script setup>
+<script setup lang="ts">
 import { RouterLink, useRoute } from 'vue-router';
 import logo from '../assets/images/wallet-100.png';
 
-const isActiveLink = (routePath) => {
-  const route = useRoute();
+const route = useRoute();
+
+const isActiveLink = (routePath: string): boolean => {
   return route.path === routePath;
-};
+}
 </script>
 
 <template>
@@ -17,21 +18,27 @@ const isActiveLink = (routePath) => {
         >
           <!-- Logo -->
           <RouterLink class="flex flex-shrink-0 items-center mr-4" to="/">
-            <img class="h-10 w-auto" v-bind:src="logo" alt="Vue Jobs" />
+            <img class="h-10 w-auto" v-bind:src="logo" alt="Smart Wallet logo" />
             <span class="hidden md:block text-white text-2xl font-bold ml-2">
               Smart Wallet
             </span>
           </RouterLink>
+
+          <div class="">
+            
+          </div>
+
+          <!-- Desktop Menu -->
           <div class="md:ml-auto">
-            <div class="flex space-x-2">
+            <div class="flex space-x-1">
               <RouterLink
                 to="/"
                 :class="[isActiveLink('/') ? 'bg-green-900' : 'hover:bg-gray-900 hover:text-white', 'text-white', 'rounded-md', 'px-3', 'py-2']"
-                >Home</RouterLink>
+                >Summary</RouterLink>
               <RouterLink
                 to="/jobs"
                 :class="[isActiveLink('/jobs') ? 'bg-green-900' : 'hover:bg-gray-900 hover:text-white', 'text-white', 'rounded-md', 'px-3', 'py-2']"
-                >Jobs</RouterLink>
+                >Accounts</RouterLink>
               <RouterLink
                 to="/jobs/add"
                 :class="[isActiveLink('/jobs/add') ? 'bg-green-900' : 'hover:bg-gray-900 hover:text-white', 'text-white', 'rounded-md', 'px-3', 'py-2']"
