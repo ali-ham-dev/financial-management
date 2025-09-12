@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import chevronRight from "../assets/images/chevron-right.svg";
+import chevronLeft from "../assets/images/chevron-left.svg";
+
 const items: string[] = [
     'This is my text 1', 
     'This is my text 2', 
@@ -22,11 +25,15 @@ const items: string[] = [
 <template>
     <section class="px-10 py-10 bg-green-700">
         <div class="flex flex-row w-full justify-center overflow-hidden">
-            <div class="min-w-10 max-w-20 flex-grow bg-gray-500"></div> 
+            <button class="min-w-10 max-w-20 flex-grow bg-transparent">
+                <img :src="chevronLeft" alt="left chevron" />
+            </button>
             <div class="flex flex-row overflow-x-hidden mx-2">
-                <span v-for="(item, index) in items" :key="index" class="text label">{{ item }}</span> <!--AI: I want to change background color on hover for this element-->
+                <span v-for="(item, index) in items" :key="index" class="text label">{{ item }}</span>
             </div>
-            <div class="min-w-10 max-w-20 flex-grow bg-gray-500"></div> 
+            <button class="min-w-10 max-w-20 bg-transparent">
+                <img :src="chevronRight" alt="Right chevron" />
+            </button>
         </div>
     </section>
 </template>
