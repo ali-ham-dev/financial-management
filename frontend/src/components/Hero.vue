@@ -19,7 +19,7 @@
                     {{ props.title }}
                 </h1>
                 <p class="my-4 text-xl text-white">
-                    {{ subtitle }}
+                    {{ props.subtitle }}
                 </p>
             </div>
         </div>
